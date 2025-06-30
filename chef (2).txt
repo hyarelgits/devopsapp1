@@ -1,0 +1,63 @@
+https://computingforgeeks.com/how-to-setup-chef-infra-server-on-centos-rhel/
+
+
+ opscode-manage-ctl reconfigure
+
+wget https://packages.chef.io/files/stable/chef-server/13.2.0/el/8/chef-server-core-13.2.0-1.el7.x86_64.rpm
+
+web.json
+
+{
+  "name": "web",
+  "description": "",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+
+ },
+ "chef_type": "role",
+ "run_list": [
+   "recipe[user]",
+   "recipe[sample]"
+ ],
+ "env_run_lists": {
+ }
+
+}
+
+~        
+
+
+knife role list
+knife role show web
+knife node show client
+knife node run_list set client 'role[web]'
+
+knife node show client
+chef-client -l info
+
+
+
+
+  "name": "web",
+  "description": "",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+        "user" : {
+               "list" : [ "kevin", "twinkle" ]
+        }
+ },
+ "chef_type": "role",
+ "run_list": [
+   "recipe[user]",
+   "recipe[sample]"
+ ],
+ "env_run_lists": {
+ }
+
+}
+
+
+
+
+knife role show web
+

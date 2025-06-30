@@ -1,0 +1,18 @@
+------ On CentOS / RHEL 7 ------ 
+# wget https://packages.chef.io/files/stable/chefdk/4.13.3/el/7/chefdk-4.13.3-1.el7.x86_64.rpm
+
+knife node list
+knife client list
+
+knife bootstrap 192.168.11.130 --sudo --ssh-user root --forward-agent --node-name client
+
+
+ rpm -ivh chefdk-4.13.3-1.el7.x86_64.rpm
+
+ rpm -ivh chefdk-4.13.3-1.el7.x86_64.rpm
+
+
+chef -v
+
+
+set hostname in 

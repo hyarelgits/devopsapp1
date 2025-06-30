@@ -1,0 +1,15 @@
+#
+# Cookbook:: user
+# Recipe:: default
+#
+# Copyright:: 2025, The Authors, All Rights Reserved.
+
+users = [ 'user1', 'user2' ]
+
+users.each do |u|
+        user u
+end
+
+group 'devel' do
+  members [ 'user1' ]
+end

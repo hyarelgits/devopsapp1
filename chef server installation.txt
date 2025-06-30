@@ -1,0 +1,107 @@
+Chef server installlation 
+
+
+sudo hostnamectl set-hostname chefserver.computingforgeeks.com --static
+
+
+sudo vim /etc/hosts
+10.10.1.162 chefserver.computingforgeeks.com chefserver
+
+
+sudo dnf -y install git vim wget curl bash-completion
+sudo dnf -y update
+sudo reboot
+
+
+
+wget https://packages.chef.io/files/stable/chef-server/13.2.0/el/8/chef-server-core-13.2.0-1.el7.x86_64.rpm
+
+
+
+sudo dnf localinstall chef-server-core-13.2.0-1.el7.x86_64.rpm
+
+
+
+
+sudo chef-server-ctl reconfigure
+
+sudo chef-server-ctl status
+
+
+
+
+sudo firewall-cmd --permanent --add-service={http,https}
+sudo firewall-cmd --reload
+
+
+chef-server-ctl user create USERNAME FIRST_NAME [MIDDLE_NAME] LAST_NAME EMAIL PASSWORD
+
+
+
+# Set values
+USERNAME="chefadmin"
+FIRST_NAME="Chef"
+LAST_NAME="Administrator"
+EMAIL="chefadmin@computingforgeeks.com"
+KEY_PATH="/root/chefadmin.pem"
+
+# Create user
+sudo chef-server-ctl user-create ${USERNAME} ${FIRST_NAME} ${LAST_NAME} ${EMAIL} -f ${KEY_PATH} --prompt-for-password
+
+sudo chef-server-ctl user-list
+chefadmin
+pivotal
+
+
+
+chef-server-ctl org-create ORG_NAME "ORG_FULL_NAME" \
+--association_user USERNAME --filename ORGANIZATION-validator.pem (options)
+
+
+
+sudo chef-server-ctl org-create computingforgeeks 'ComputingForGeeks, Inc.' \
+--association_user chefadmin \
+--filename /root/computingforgeeks-validator.pem
+
+
+
+sudo chef-server-ctl org-list
+computingforgeeks
+
+
+
+
+sudo find /root -name "*.pem"
+/root/chefadmin.pem
+/root/computingforgeeks-validator.pem
+
+
+
+sudo chef-server-ctl install chef-manage 
+sudo chef-server-ctl reconfigure 
+sudo chef-manage-ctl reconfigure
+
+
+
+
+Install Chef Workstation on CentOS 8 / RHEL 8
+
+
+
+sudo yum -y install wget
+wget https://packages.chef.io/files/stable/chef-workstation/20.7.96/el/8/chef-workstation-20.7.96-1.el7.x86_64.rpm
+
+
+
+ sudo yum localinstall chef-workstation-20.7.96-1.el7.x86_64.rpm
+
+
+
+chef --version
+
+
+
+
+
+
+
